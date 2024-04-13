@@ -1,0 +1,33 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Purchase Confirmation</title>
+    
+</head>
+<body>
+    <h1>Purchase Confirmation</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cart_item in cart_items %}
+            <tr>
+                <td>{{ cart_item.product.p_name }}</td>
+                <td>{{ cart_item.quantity }}</td>
+                <td>{{ cart_item.product.rate_per_unit }}</td>
+                <td>{{ cart_item.product.rate_per_unit * cart_item.quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <form class="buy-form" method="post" action="{{ url_for('purchase_confirmation') }}">
+        <input type="submit" value="Done">
+    </form>
+</body>
+</html> -->

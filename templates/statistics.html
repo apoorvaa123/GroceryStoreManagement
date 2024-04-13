@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Statistics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #ec3a2d;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;   
+        }
+    </style>
+</head>
+<body>
+    <h1><i>Product Statistics</i></h1>
+    
+
+    <h2><u>Expiring Products </u>(within 30 days)</h2>
+    {% if expiring_products|length > 0 %}
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Expiry Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in expiring_products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.expiry_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Yay! None of the products are nearing their expiry dates</p>
+    {% endif %}
+    
+    <h2><u>Expired Products</u></h2>
+    {% if expired_products|length > 0 %}
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Expiry Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in expired_products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.expiry_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Yay! None of the products are expired!</p>
+    {% endif %}
+    <br>
+    <br>
+
+    <a class="back-btn" href="{{ url_for('adminpage') }}">Back</a>
+</body>
+</html>

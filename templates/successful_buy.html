@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Successfully Purchased</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            background-image:url('static/images/successful_buy.jpg');
+            background-size: cover;
+            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 36px;
+            margin-top: 50px;
+        }
+
+        p {
+            color: #555;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        .remove-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #e91e63;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .remove-button:hover {
+            background-color: #d81b60;
+        }
+    </style>
+</head>
+<body>
+    <br><br><br><br><br><br>
+    <h1>Your Order has been placed successfully!</h1>
+    <p>Thanks for buying from our store!</p>
+    <p> Our salesperson will contact you soon.</p>
+    <a class="remove-button" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

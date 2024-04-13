@@ -1,0 +1,338 @@
+ <!-- <!DOCTYPE html>
+ <html>
+ <head>
+     <title>Home</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+     <style>
+         
+         body {
+             display: flex;
+             min-height: 100vh;
+             margin: 0;
+             font-family: Arial, sans-serif;
+             background-color: #f9f9f9;
+             color: #333;
+         }
+ 
+         .sidebar {
+             background-color: #333;
+             color: #fff;
+             padding: 20px;
+             width: 200px;
+             display: flex;
+             flex-direction: column;
+         }
+ 
+         .sidebar h1,
+         .sidebar a {
+             color: #fff;
+             text-decoration: none;
+         }
+ 
+         .sidebar a {
+             margin-bottom: 10px;
+             padding: 5px 10px;
+             border-radius: 4px;
+             transition: background-color 0.3s ease;
+         }
+ 
+         .sidebar a:hover {
+             background-color: #555;
+         }
+
+         .contact-details {
+            position: absolute;
+            top: 3px;
+            right: 20px;
+            background-color: #f2f2f2;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .contact-details li {
+            margin-bottom: 5px;
+        }
+ 
+         .content {
+             padding: 20px;
+             width: 100%;
+         }
+         
+         .search-form {
+            margin-bottom: 20px;
+        }
+
+        .search-form input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 300px;
+        }
+
+        .search-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search-form button:hover {
+            background-color: #0056b3;
+        }
+     </style>
+ </head>
+ <body>
+     <div class="sidebar">
+         <h2>Welcome {{ user }}!</h2>
+         <a href="{{ url_for('view_cart') }}" class="view-cart-btn">
+            <img src="{{ url_for('static', filename='images/cart_icon.jpg') }}" alt="Cart Icon" class="cart-icon">View cart
+        </a>
+        
+        <div><p>Items: {{ cart_items_count }}</p></div>
+        <br><br>
+         <form action="{{ url_for('index') }}" method="POST" onsubmit="return confirm('Are you sure you want to log out?')">
+             <button type="submit" class="btn">Logout</button>
+         </form>
+     </div>
+     <div class="content">
+         <h1>🍎GROCERY STORE</h1>
+         <form class="search-form" method="POST" action="{{ url_for('dashboard') }}">
+            <input type="text" name="search_query" placeholder="Search for a product">
+            <button type="submit">Search</button>
+        </form>
+         <div class="categories-container">
+             {% if not categories %}
+             <h1>Please check later..</h1>
+             {% else %}
+             {% for category in categories %}
+             <h2 class="category-name">{{ category.c_name }}</h2>
+             <div class="category-box" style="background-image: url('{{ url_for('static', filename='images/' + category.c_bg_image) }}');">
+                 
+                <div class="products-container">
+                    {% if search_results %}
+                    {% for product in search_results %}
+                    {% if product in category.products %}
+                    
+                    <div class="product-box" style="background-image: url('static/images/product_box_bg.jpg')";>
+                        <div class="product-name">{{ product.p_name }}</div>
+                        <div class="product-price">Rs.{{ product.rate_per_unit }}/unit</div>
+                        <br>
+                        <br><br><br>
+                        <img src="{{ url_for('static', filename='images/' + product.p_bg_image) }}" alt="Product Image" width="100" height="110">
+                        <p>Quantity Available: {% if product.avail_qty > 0 %}<b>{{ product.avail_qty }}</b>{% else %}<b>Out of Stock</b>{% endif %}</p>
+                        {% if product.avail_qty > 0 %}
+                        <form action="{{ url_for('add_cart', product_id=product.product_id) }}" method="GET">
+                            <input class="add_cart-btn" type="submit" value="Add to Cart">
+                        </form>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    {% for product in category.products %}
+                    
+                    <div class="product-box" style="background-image: url('static/images/product_box_bg.jpg')";>
+                        <div class="product-name">{{ product.p_name }}</div>
+                        <div class="product-price">Rs.{{ product.rate_per_unit }}/unit</div>
+                        <br>
+                        <br><br><br>
+                        <img src="{{ url_for('static', filename='images/' + product.p_bg_image) }}" alt="Product Image" width="100" height="110">
+                        <p>Quantity Available: {% if product.avail_qty > 0 %}<b>{{ product.avail_qty }}</b>{% else %}<b>Out of Stock</b>{% endif %}</p>
+                        {% if product.avail_qty > 0 %}
+                        <form action="{{ url_for('add_cart', product_id=product.product_id) }}" method="GET">
+                            <input class="add_cart-btn" type="submit" value="Add to Cart">
+                        </form>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+     
+        <ul class="contact-details">
+            <h4><i>Contact Details </i></h4>
+            <p><i>Email: grocerystore@gmail.com</i></p>
+           <i> Phone: +91 79999 89999 </i>
+        </ul>
+    
+ </body>
+ </html>
+  -->
+
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <title>Home</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+      <style>
+          
+          body {
+              display: flex;
+              min-height: 100vh;
+              margin: 0;
+              font-family: Arial, sans-serif;
+              background-color: #f9f9f9;
+              color: #333;
+          }
+  
+          .sidebar {
+              background-color: #333;
+              color: #fff;
+              padding: 20px;
+              width: 200px;
+              display: flex;
+              flex-direction: column;
+          }
+  
+          .sidebar h1,
+          .sidebar a {
+              color: #fff;
+              text-decoration: none;
+          }
+  
+          .sidebar a {
+              margin-bottom: 10px;
+              padding: 5px 10px;
+              border-radius: 4px;
+              transition: background-color 0.3s ease;
+          }
+  
+          .sidebar a:hover {
+              background-color: #555;
+          }
+ 
+          .contact-details {
+             position: absolute;
+             top: 3px;
+             right: 20px;
+             background-color: #f2f2f2;
+             padding: 5px;
+             border-radius: 5px;
+         }
+ 
+         .contact-details li {
+             margin-bottom: 5px;
+         }
+  
+          .content {
+              padding: 20px;
+              width: 100%;
+          }
+          
+          .search-form {
+             margin-bottom: 20px;
+         }
+ 
+         .search-form input[type="text"] {
+             padding: 10px;
+             border: 1px solid #ccc;
+             border-radius: 4px;
+             width: 300px;
+         }
+ 
+         .search-form button {
+             padding: 10px 20px;
+             background-color: #007bff;
+             color: white;
+             border: none;
+             border-radius: 4px;
+             cursor: pointer;
+         }
+ 
+         .search-form button:hover {
+             background-color: #0056b3;
+         }
+      </style>
+  </head>
+  <body>
+      <div class="sidebar">
+          <h2>Welcome {{ user }}!</h2>
+          <a href="{{ url_for('view_cart') }}" class="view-cart-btn">
+             <img src="{{ url_for('static', filename='images/cart_icon.jpg') }}" alt="Cart Icon" class="cart-icon">View cart
+         </a>
+         
+         <div><p>Items: {{ cart_items_count }}</p></div>
+         <br><br>
+          <form action="{{ url_for('index') }}" method="POST" onsubmit="return confirm('Are you sure you want to log out?')">
+              <button type="submit" class="btn">Logout</button>
+          </form>
+      </div>
+      <div class="content">
+          <h1>🍎GROCERY STORE</h1>
+          <form class="search-form" method="POST" action="{{ url_for('dashboard') }}">
+             <input type="text" name="search_query" placeholder="Search for a product">
+             <button type="submit">Search</button>
+         </form>
+        {% if search_results %}
+        {% for category in categories %}
+        {% for product in search_results %}
+        {% if product in category.products %}
+        <div class="products-container">
+        
+        <div class="product-box" style="background-image: url('static/images/product_box_bg.jpg')";>
+            <div class="product-name">{{ product.p_name }}</div>
+            <div class="product-price">Rs.{{ product.rate_per_unit }}/unit</div>
+            <br>
+            <br><br><br>
+            <img src="{{ url_for('static', filename='images/' + product.p_bg_image) }}" alt="Product Image" width="100" height="110">
+            <p>Quantity Available: {% if product.avail_qty > 0 %}<b>{{ product.avail_qty }}</b>{% else %}<b>Out of Stock</b>{% endif %}</p>
+            {% if product.avail_qty > 0 %}
+            <form action="{{ url_for('add_cart', product_id=product.product_id) }}" method="GET">
+                <input class="add_cart-btn" type="submit" value="Add to Cart">
+            </form>
+            {% endif %}
+        </div>
+        </div>
+
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        {% elif search_query %}
+        <p>Product not found</p>
+        {% else %}
+          <div class="categories-container">
+              {% if not categories %}
+              <h1>Please check later..</h1>
+              {% else %}
+              {% for category in categories %}
+              <h2 class="category-name">{{ category.c_name }}</h2>
+              <div class="category-box" style="background-image: url('{{ url_for('static', filename='images/' + category.c_bg_image) }}');">
+                  
+                 <div class="products-container">
+                     
+                     {% for product in category.products %}
+
+                     <div class="product-box" style="background-image: url('static/images/product_box_bg.jpg')";>
+                         <div class="product-name">{{ product.p_name }}</div>
+                         <div class="product-price">Rs.{{ product.rate_per_unit }}/unit</div>
+                         <br>
+                         <br><br><br>
+                         <img src="{{ url_for('static', filename='images/' + product.p_bg_image) }}" alt="Product Image" width="100" height="110">
+                         <p>Quantity Available: {% if product.avail_qty > 0 %}<b>{{ product.avail_qty }}</b>{% else %}<b>Out of Stock</b>{% endif %}</p>
+                         {% if product.avail_qty > 0 %}
+                         <form action="{{ url_for('add_cart', product_id=product.product_id) }}" method="GET">
+                             <input class="add_cart-btn" type="submit" value="Add to Cart">
+                         </form>
+                         {% endif %}
+                     </div>
+                     {% endfor %}
+                 </div>
+             </div>
+             {% endfor %}
+             {% endif %}
+         </div>
+         {% endif %}
+      
+         <ul class="contact-details">
+             <h4><i>Contact Details </i></h4>
+             <p><i>Email: grocerystore@gmail.com</i></p>
+            <i> Phone: +91 79999 89999 </i>
+         </ul>
+     
+  </body>
+  </html>

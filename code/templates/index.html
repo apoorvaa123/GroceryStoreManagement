@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image: url('static/images/grocery_bg.jpg');
+            background-color: rgb(215, 226, 227);
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #0c0c0c;
+            font-size: 36px;
+            font-family: 'Edu SA Beginner', cursive;
+            padding-top: 100px;
+        }
+
+        a {
+            margin: 10px;
+            text-decoration: none;
+        }
+
+        .signup-link {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #000000;
+        }
+
+        .signup-link a {
+            color: #4554fd;
+            text-decoration: none;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4554fd;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        .button-container button:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            color: #ffffff;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+    <h1>Grocery Store</h1>
+    <div class="button-container">
+        <a href="/login"><button>User Login</button></a>
+    </div>
+    <div class="button-container">
+        <a href="/adminlogin"><button>Admin Login</button></a>
+    </div>
+    <div class="signup-link">
+        <b>Not yet a member? <a href="/signup">Sign Up</a></b>
+    </div>
+    
+    <div class="footer">
+        &copy; 2023 Grocery Store. All rights reserved.
+    </div>
+</body>
+</html>

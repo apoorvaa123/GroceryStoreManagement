@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Buy Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .product-details {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #50d2ef;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #47e3ff;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-details">
+        <h1>{{ product.p_name }}</h1>
+        <img src="{{ url_for('static', filename='images/' + product.p_bg_image) }}" alt="Product Image" width="100" height="110">
+        <p><i>Rate per Quantity: </i><b> Rs.{{ product.rate_per_unit }}</b></p>
+        <p><i>Quantity Available: </i><b>{{ product.avail_qty }}</b></p>
+        <p><i>Manufacture Date: </i><b>{{ product.manufacture_date }}</b></p>
+        <p><i>Expiry Date: </i><b>{{ product.expiry_date }}</b></p><br>
+        <form method="POST" action="{{ url_for('add_cart', product_id=product.product_id) }}">
+            <label>Enter quantity:</label>
+            <input type="number" name="quantity" required min="1" max="{{ product.avail_qty }}">
+            <input type="submit" value="Add to Cart">
+        </form>
+    </div>
+    <a class="home-btn" href="{{ url_for('dashboard') }}">Home</a>
+</body>
+</html>
